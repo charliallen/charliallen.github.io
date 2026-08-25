@@ -1,3 +1,18 @@
 # Charli's Website!
 
-Hello, welcome to my website. I don't have a lot here right now, but I'm going to be fixing that later.
+Hello, welcome to my website.
+
+## Information
+
+- Pronouns: she/her, or it/its if you're not a coward
+- Graduated from UCI with a BS in physics
+- Self-taught programmer
+- Fan of scheme and guix
+- Willing to stare into the unblinking eye of infinity until it blinks
+- Currently working at Red Hat
+
+## Links
+
+- [GitHub Account](https://github.com/charliallen)
+- [My public zettelkasten](https://charliallen.github.io/zettelkasten)
+
