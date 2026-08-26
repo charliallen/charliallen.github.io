@@ -35,5 +35,6 @@
             (atom-feeds-by-tag #:blog-prefix post-prefix)
             (flat-pages "pages" #:template flat-page-template)
             (static-directory "images")
+            (static-directory "videos")
             (static-directory "css"))
       #:build-directory "../../target/")
