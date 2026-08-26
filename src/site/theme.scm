@@ -32,6 +32,27 @@
       ((head . tail)
        (cons head (loop tail))))))
 
+(define nav
+  `(nav
+    (ul (li ,(link "Charli" "/")))
+    (ul (li ,(link "About" "/about.html"))
+        (li ,(link "Blog" "/blog.html")))))
+
+(define footer
+  `(footer (@ (class "text-center"))
+           (p (@ (class "copyright"))
+              "© 2026 Charli Allen"
+              ,%cc-by-sa-button)
+           (p "The text and images on this site are
+free culture works available under the " ,%cc-by-sa-link " license.")
+           (p "This website is built with "
+              (a (@ (href "https://dthompson.us/projects/haunt.html"))
+                 "Haunt")
+              ", a static site generator written in "
+              (a (@ (href "https://gnu.org/software/guile"))
+                 "Guile Scheme")
+              ".")))
+
 (define charli-theme
   (theme #:name "charli"
          #:layout
@@ -51,24 +72,9 @@
               ,(stylesheet "charli"))
              (body
               (div (@ (class "container"))
-                   (nav
-                    (ul (li ,(link "Charli" "/")))
-                    (ul (li ,(link "About" "/about.html"))
-                        (li ,(link "Blog" "/blog.html"))))
+                   ,nav
                    ,body
-                   (footer (@ (class "text-center"))
-                           (p (@ (class "copyright"))
-                              "© 2026 Charli Allen"
-                              ,%cc-by-sa-button)
-                           (p "The text and images on this site are
-free culture works available under the " ,%cc-by-sa-link " license.")
-                           (p "This website is built with "
-                              (a (@ (href "https://dthompson.us/projects/haunt.html"))
-                                 "Haunt")
-                              ", a static site generator written in "
-                              (a (@ (href "https://gnu.org/software/guile"))
-                                 "Guile Scheme")
-                              "."))))))
+                   ,footer))))
          #:post-template
          (lambda (post)
            `((article
