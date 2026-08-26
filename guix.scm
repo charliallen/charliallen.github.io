@@ -27,7 +27,7 @@
         (add-after 'unpack 'build-site
           (lambda _
             (with-directory-excursion "src/site"
-              (invoke "haunt" "build" "-c" "haunt.scm")))))))
+              (invoke "haunt" "build")))))))
   (native-inputs (list haunt))
   (synopsis "Charli Allen's personal website")
   (description "Static site for charliallen.github.io, built with Haunt.")

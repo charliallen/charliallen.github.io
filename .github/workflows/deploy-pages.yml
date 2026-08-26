@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Build haunt
+        run: |
+            sudo apt install -y guix
+            guix pull --disable-authentication --commit=v1.5.0
+            GUIX_PROFILE="/home/runner/.config/guix/current"
+            source "$GUIX_PROFILE/etc/profile"
+            TARGET="$(guix build -f guix.scm)/www/site/"
+
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: $TARGET
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
