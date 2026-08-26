@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: post
+# key: post
+# --
+title: $1
+date: `(format-time-string "%Y-%m-%d %H:%M")`
+summary: $2
+tags: $3
+---
+
+$0
