@@ -2,35 +2,29 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
-
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: registry.gitlab.com/debdistutils/guix/container:latest
 
     steps:
       - name: Checkout source
         uses: actions/checkout@v4
 
-      - name: Build haunt
+      - name: Setup guix
         run: |
-            groupadd --gid 0 root
-            useradd --uid 0 --gid root --shell /bin/sh --home-dir / --system root
-            cp -rL /gnu/store/*profile/etc/* /etc/
-            groupadd --system guixbuild
-            for i in $(seq -w 1 10); do useradd -g guixbuild -G guixbuild -d /var/empty -s $(command -v nologin) -c "Guix build user $i" --system guixbuilder$i; done
-            export HOME=/
-            env LANG=C.UTF-8 guix-daemon --build-users-group=guixbuild &
-            guix archive --authorize < /share/guix/ci.guix.gnu.org.pub
-            guix archive --authorize < /share/guix/bordeaux.guix.gnu.org.pub
+            ls -al
+            sudo apt update
+            sudo apt install -y guix
+            sudo guix archive --authorize < .github/workflows/keys/bordeaux.guix.gnu.org.pub
+            sudo guix archive --authorize < .github/workflows/keys/berlin.guix.gnu.org.pub
+            guix pull -C channels.scm
             guix describe
-            guix install libgpg-error
-            GUIX_PROFILE="//.guix-profile"
-            . "$GUIX_PROFILE/etc/profile"
-            TARGET="$(guix build -f guix.scm)/www/site/"
+
+      - name: Build site
+        run: |
+          TARGET="$(guix build -f guix.scm)/www/site/"
 
       - name: Upload static files as artifact
         id: deployment
