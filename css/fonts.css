@@ -1,0 +1,61 @@
+/* Linux Libertine */
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url('/fonts/LinLibertine_R.woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url('/fonts/LinLibertine_RI.woff2');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Linux Libertine';
+    src: url('/fonts/LinLibertine_RB.woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Linux Biolinum */
+
+@font-face {
+    font-family: 'Linux Biolinum';
+    src: url('/fonts/LinBiolinum_R.woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Linux Biolinum';
+    src: url('/fonts/LinBiolinum_RI.woff2');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Linux Biolinum';
+    src: url('/fonts/LinBiolinum_RB.woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+
+/* Inconsolata */
+
+@font-face {
+    font-family: 'Inconsolata';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/Inconsolata-Regular.woff2');
+}
+
+@font-face {
+    font-family: 'Inconsolata';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/Inconsolata-Bold.woff2');
+}
