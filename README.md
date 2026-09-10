@@ -1,23 +1,25 @@
-# Charli's Website!
+# Charli's Blog
 
-Hello, welcome to my website. Eventually this will be cooler but it turns out building pages with a cursed setup is difficult.
+The source for Charli's personal blog, built with [Haunt](https://dthompson.us/projects/haunt.html), a static-site generator written in Guile Scheme.
 
-## Information
+Posts live in `src/site/posts/`; pages, the theme, and static assets live alongside them in `src/site/`.  The generated site is intentionally not committed.
 
-- Pronouns: she/her, or it/its if you're not a coward
-- Graduated from UCI with a BS in physics
-- Self-taught programmer
-- Fan of scheme and guix
-- Willing to stare into the unblinking eye of infinity until it blinks
-- Currently working at Red Hat
+## Building
 
-## Links
+The project uses Guix for its development environment.  From the repository root:
 
-- [GitHub Account](https://github.com/charliallen)
-- [My public zettelkasten](https://charliallen.github.io/zettelkasten)
+```sh
+make build
+```
 
+For iterative work, run Haunt from the directory containing its configuration:
 
-Unless stated otherwise this site is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+```sh
+cd src/site
+guix shell -m ../../manifest.scm -- haunt build -c haunt.scm
+```
+
+Unless stated otherwise, site content is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Deploying
 
