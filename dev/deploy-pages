@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Build the site locally with Guix and publish only the generated files.
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+if ! git diff --quiet -- src/site guix.scm channels.scm || \
+   ! git diff --cached --quiet -- src/site guix.scm channels.scm || \
+   [[ -n "$(git ls-files --others --exclude-standard -- src/site guix.scm channels.scm)" ]]; then
+  echo "Refusing to deploy changed site sources. Commit, stash, or add them first." >&2
+  exit 1
+fi
+
+store_item="$(guix build -f guix.scm)"
+site_directory="$store_item/www/site"
+
+if [[ ! -d "$site_directory" ]]; then
+  echo "The Guix build did not produce $site_directory." >&2
+  exit 1
+fi
+
+mkdir -p "$repo_root/target"
+pages_worktree="$(mktemp -d "$repo_root/target/charliallen-pages.XXXXXX")"
+
+cleanup() {
+  git worktree remove --force "$pages_worktree" 2>/dev/null || rm -rf "$pages_worktree"
+}
+trap cleanup EXIT
+
+if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+  git worktree add --detach "$pages_worktree" origin/gh-pages >/dev/null
+else
+  # The first deploy creates a branch containing only generated files.
+  git worktree add --detach "$pages_worktree" HEAD >/dev/null
+  git -C "$pages_worktree" checkout --orphan gh-pages >/dev/null 2>&1
+  git -C "$pages_worktree" rm -rf . >/dev/null
+fi
+# A linked worktree stores its Git metadata in a `.git` file; do not delete it.
+# Guix store items are read-only, so do not preserve their file modes here.
+rsync -a --no-perms --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r --delete --exclude=.git \
+  "$site_directory/" "$pages_worktree/"
+touch "$pages_worktree/.nojekyll"
+
+git -C "$pages_worktree" add --all
+
+if git -C "$pages_worktree" diff --cached --quiet; then
+  echo "gh-pages is already up to date."
+  exit 0
+fi
+
+git -C "$pages_worktree" -c user.name="GitHub Pages deploy" \
+  -c user.email="pages@users.noreply.github.com" \
+  commit -m "Deploy site"
+git -C "$pages_worktree" push --force origin HEAD:gh-pages
+
+echo "Published $site_directory to origin/gh-pages."
