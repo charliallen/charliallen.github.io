@@ -13,11 +13,18 @@ This repository is also a Guix channel.  It exports the
 ```scheme
 (cons (channel
        (name 'charliallen)
-       (url "https://github.com/charliallen/charliallen.github.io.git"))
+       (url "https://github.com/charliallen/charliallen.github.io.git")
+       (introduction
+        (make-channel-introduction
+         "4682bffef951b247d4d5f47bb213d33caa9a3dc4"
+         (openpgp-fingerprint
+          "5B7C EEC8 8CEF 9EE0 3352 7917 88EB B04F ED20 ECB6"))))
       %default-channels)
 ```
 
-Then run `guix pull`; the package is available as `charliallen-github-io`.
+The introduction anchors the channel at its first channel commit and requires
+subsequent commits to be signed by Charli Allen's OpenPGP key.  Then run
+`guix pull`; the package is available as `charliallen-github-io`.
 During development from this checkout, use `-L env/guix` to expose the
 module to Guix.
 
