@@ -1,0 +1,5 @@
+;; Authorized OpenPGP keys for commits in this Guix channel.
+(authorizations
+ (version 0)
+ (("5B7C EEC8 8CEF 9EE0 3352 7917 88EB B04F ED20 ECB6"
+   (name "Charli Allen"))))
