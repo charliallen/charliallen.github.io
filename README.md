@@ -4,6 +4,23 @@ The source for Charli's personal blog, built with [Haunt](https://dthompson.us/p
 
 Posts live in `src/site/posts/`; pages, the theme, and static assets live alongside them in `src/site/`.  The generated site is intentionally not committed.
 
+## Guix channel
+
+This repository is also a Guix channel.  It exports the
+`charliallen-github-io` package from the `(packages charliallen)` module.  Add it to
+`~/.config/guix/channels.scm` alongside the default channels:
+
+```scheme
+(cons (channel
+       (name 'charliallen)
+       (url "https://github.com/charliallen/charliallen.github.io.git"))
+      %default-channels)
+```
+
+Then run `guix pull`; the package is available as `charliallen-github-io`.
+During development from this checkout, use `-L env/guix` to expose the
+module to Guix.
+
 ## Building
 
 The project uses Guix for its development environment.  From the repository root:
@@ -16,7 +33,7 @@ For iterative work, run Haunt from the directory containing its configuration:
 
 ```sh
 cd src/site
-guix shell -m ../../manifest.scm -- haunt build -c haunt.scm
+guix shell -m ../../env/guix/manifest.scm -- haunt build -c haunt.scm
 ```
 
 Unless stated otherwise, site content is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
@@ -38,6 +55,6 @@ Then configure **Settings → Pages → Build and deployment → Source** as
 **Deploy from a branch**, and select the newly-created `gh-pages` branch and
 the `/(root)` folder.  Future deployments use the same command.
 
-The command uses the Guix build defined by `guix.scm`, creates a temporary Git
+The command uses the Guix build defined by `env/guix/guix.scm`, creates a temporary Git
 worktree, and replaces only the remote `gh-pages` branch.  It never changes
 your current branch or working tree.

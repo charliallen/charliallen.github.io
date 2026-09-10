@@ -5,14 +5,15 @@ set -euo pipefail
 repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
-if ! git diff --quiet -- src/site guix.scm channels.scm || \
-   ! git diff --cached --quiet -- src/site guix.scm channels.scm || \
-   [[ -n "$(git ls-files --others --exclude-standard -- src/site guix.scm channels.scm)" ]]; then
+channel_sources=(src/site .guix-channel env/guix)
+if ! git diff --quiet -- "${channel_sources[@]}" || \
+   ! git diff --cached --quiet -- "${channel_sources[@]}" || \
+   [[ -n "$(git ls-files --others --exclude-standard -- "${channel_sources[@]}")" ]]; then
   echo "Refusing to deploy changed site sources. Commit, stash, or add them first." >&2
   exit 1
 fi
 
-store_item="$(guix build -f guix.scm)"
+store_item="$(guix build -L env/guix -f env/guix/guix.scm)"
 site_directory="$store_item/www/site"
 
 if [[ ! -d "$site_directory" ]]; then

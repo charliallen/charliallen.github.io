@@ -1,0 +1,4 @@
+;; Package modules for the charliallen.github.io Guix channel.
+(channel
+ (version 0)
+ (directory "env/guix"))
