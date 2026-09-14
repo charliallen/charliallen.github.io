@@ -2,4 +2,10 @@
 (authorizations
  (version 0)
  (("5B7C EEC8 8CEF 9EE0 3352 7917 88EB B04F ED20 ECB6"
+   (name "Charli Allen"))
+  ("BF5E 9364 B8E6 AC18 3DC2  0E92 8EDA A6A9 1ED3 DEC8"
    (name "Charli Allen"))))
+
+;; Local Variables:
+;; mode: scheme
+;; End:
