@@ -39,7 +39,7 @@ else
 fi
 # A linked worktree stores its Git metadata in a `.git` file; do not delete it.
 # Guix store items are read-only, so do not preserve their file modes here.
-rsync -a --no-perms --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r --delete --exclude=.git \
+rsync -a --no-perms --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r --delete --exclude=.git --exclude=CNAME --exclude=.github \
   "$site_directory/" "$pages_worktree/"
 touch "$pages_worktree/.nojekyll"
 
