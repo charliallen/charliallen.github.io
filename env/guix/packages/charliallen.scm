@@ -5,6 +5,7 @@
   #:use-module (guix packages)
   #:use-module (guix utils)
   #:use-module ((guix licenses) #:prefix license:)
+  #:use-module (gnu packages guile)
   #:use-module (gnu packages guile-xyz)
   #:export (charliallen-github-io))
 
@@ -32,7 +33,7 @@
             (lambda _
               (with-directory-excursion "src/site"
                 (invoke "haunt" "build")))))))
-    (native-inputs (list haunt))
+    (native-inputs (list guile-next haunt))
     (synopsis "Charli Allen's personal website")
     (description "Static site for charliallen.github.io, built with Haunt.")
     (home-page "https://charliallen.github.io")
