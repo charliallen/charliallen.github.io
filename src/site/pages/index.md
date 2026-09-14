@@ -8,3 +8,4 @@ Hello, welcome to my website.
 
 - [GitHub Account](https://github.com/charliallen)
 - [My public zettelkasten](https://charliallen.github.io/zettelkasten)
+- [My public keys](/keys)
