@@ -20,7 +20,7 @@
 (site #:title
       "Charli's Web"
       #:domain
-      "charliallen.github.io"
+      "charlilefay.com"
       #:default-metadata
       '((author . "Charli Allen"))
       #:readers
@@ -33,8 +33,8 @@
             (atom-feed #:blog-prefix post-prefix)
             (atom-feeds-by-tag #:blog-prefix post-prefix)
             (flat-pages "pages" #:template flat-page-template)
+	    (static-directory "css")
             (static-directory "images")
 	    (static-directory "keys")
-            (static-directory "videos")
-            (static-directory "css"))
+            (static-directory "videos"))
       #:build-directory "../../target/")
