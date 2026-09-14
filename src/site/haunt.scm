@@ -1,17 +1,16 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
-
-(use-modules
- (haunt asset)
- (haunt builder atom)
- (haunt builder assets)
- (haunt builder blog)
- (haunt builder flat-pages)
- (haunt post)
- (haunt reader commonmark)
- (haunt reader skribe)
- (haunt site)
- (theme)
- (utils))
+(define-module (haunt)
+  #:use-module (haunt asset)
+  #:use-module (haunt builder atom)
+  #:use-module (haunt builder assets)
+  #:use-module (haunt builder blog)
+  #:use-module (haunt builder flat-pages)
+  #:use-module (haunt post)
+  #:use-module (haunt reader commonmark)
+  #:use-module (haunt reader skribe)
+  #:use-module (haunt site)
+  #:use-module (theme)
+  #:use-module (utils))
 
 (define post-prefix "/posts")
 
