@@ -16,9 +16,9 @@ This repository is also a Guix channel.  It exports the
        (url "https://github.com/charliallen/charliallen.github.io.git")
        (introduction
         (make-channel-introduction
-         "4682bffef951b247d4d5f47bb213d33caa9a3dc4"
+         "f8bf20d048bfa5b76cdb091ec6e136f888c266ac"
          (openpgp-fingerprint
-          "5B7C EEC8 8CEF 9EE0 3352 7917 88EB B04F ED20 ECB6"))))
+          "BF5E 9364 B8E6 AC18 3DC2  0E92 8EDA A6A9 1ED3 DEC8"))))
       %default-channels)
 ```
 
